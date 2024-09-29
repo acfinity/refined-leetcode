@@ -97,6 +97,9 @@ const GlobalStyle = createGlobalStyle`
   .resize-container .custom-resize .resize-dot:not(:first-of-type) {
     margin-top: 3px;
   }
+  #footer-root {
+    display: none !important;
+  }
 `
 
 const Variables = createGlobalStyle<{
@@ -109,11 +112,71 @@ const Variables = createGlobalStyle<{
   }
 `
 
+const AcceptedStatusStyle = createGlobalStyle`
+  .contest-question-info {
+    width: fit-content;
+  }
+
+  .contest-question-info ul.list-group {
+    display: flex;
+    align-items: center;
+  }
+
+  .contest-question-info ul.list-group li {
+    background: none;
+    border: none;
+    padding: 2px;
+  }
+
+  .contest-question-info ul.list-group li:nth-of-type(odd) {
+    background: none;
+    border: none;
+  }
+
+  .contest-question-info ul.list-group li strong {
+    display: none;
+  }
+
+  .contest-question-info ul.list-group li:nth-child(1),
+  .contest-question-info ul.list-group li:nth-child(3) {
+    padding: 2px 8px 2px 8px;
+    border-radius: 50px 0 0 50px;
+    border: solid 1px #ccc;
+    border-right: none;
+    font-weight: 600;
+    color: #499e49;
+    position: relative;
+  }
+
+  .contest-question-info ul.list-group li:nth-child(1)::after,
+  .contest-question-info ul.list-group li:nth-child(3)::after {
+    content: '/';
+    position: absolute;
+    top: -0.5px;
+    right: 1px;
+    font-size: 1.1em;
+    color: #aaa;
+    font-weight: lighter;
+  }
+
+  .contest-question-info ul.list-group li:nth-child(2),
+  .contest-question-info ul.list-group li:nth-child(4) {
+    padding: 2px 8px 2px 0;
+    border-radius: 0 50px 50px 0;
+    border: solid 1px #ccc;
+    border-left: none;
+    margin-right: 6px;
+    font-weight: 600;
+  }
+`
+
 const OptimizedContestProblemsPage = (): JSX.Element => {
   const options = useAppSelector(selectOptions)
   const dispatch = useAppDispatch()
 
   const modifyPageLayout = !!options?.contestProblemsPage.modifyPageLayout
+  const simplifyAcceptedStatus =
+    !!options?.contestProblemsPage.simplifyAcceptedStatus
   const reverseLayout = !!options?.contestProblemsPage.reverseLayout
   const problemViewWidth = options?.contestProblemsPage.problemViewWidth
 
@@ -195,6 +258,7 @@ const OptimizedContestProblemsPage = (): JSX.Element => {
 
   return (
     <>
+      {simplifyAcceptedStatus && <AcceptedStatusStyle />}
       {modifyPageLayout && <GlobalStyle />}
       <Variables
         $layoutDirection={reverseLayout ? 'row-reverse' : 'row'}

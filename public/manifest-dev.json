@@ -21,7 +21,8 @@
       ],
       "matches": [
         "*://leetcode-cn.com/*",
-        "*://leetcode.cn/*"
+        "*://leetcode.cn/*",
+        "https://leetcode.com/*"
       ]
     }
   ],
@@ -29,7 +30,8 @@
     {
       "matches": [
         "https://leetcode-cn.com/*",
-        "https://leetcode.cn/*"
+        "https://leetcode.cn/*",
+        "https://leetcode.com/*"
       ],
       "js": [
         "content-load.bundle.js"
@@ -53,6 +55,7 @@
   "host_permissions": [
     "https://leetcode-cn.com/*",
     "https://leetcode.cn/*",
+    "https://leetcode.com/*",
     "http://localhost:9100/*",
     "https://leetcode-rating-predictor.herokuapp.com/*",
     "https://leetcode-predictor.herokuapp.com/*",
@@ -62,7 +65,8 @@
   "externally_connectable": {
     "matches": [
       "https://leetcode-cn.com/*",
-      "https://leetcode.cn/*"
+      "https://leetcode.cn/*",
+      "https://leetcode.com/*"
     ]
   }
 }

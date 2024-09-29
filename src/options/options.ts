@@ -15,6 +15,7 @@ export const defaultOptions = {
   },
   contestProblemsPage: {
     disableShortcutkey: false,
+    simplifyAcceptedStatus: true,
     modifyPageLayout: false,
     reverseLayout: false,
     problemViewWidth: '40%',
@@ -50,6 +51,7 @@ export const labelMap: { [key: string]: string } = {
   problemRating: '题目评分',
   timer: '计时器',
   disableShortcutkey: '禁用快捷键',
+  simplifyAcceptedStatus: '精简展示通过信息',
   modifyPageLayout: '修改页面布局',
   reverseLayout: '题面居于右侧',
   languageIcon: '语言图标',
