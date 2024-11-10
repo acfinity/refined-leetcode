@@ -97,6 +97,7 @@ const GlobalStyle = createGlobalStyle`
   .resize-container .custom-resize .resize-dot:not(:first-of-type) {
     margin-top: 3px;
   }
+
   #footer-root {
     display: none !important;
   }
@@ -167,6 +168,10 @@ const AcceptedStatusStyle = createGlobalStyle`
     border-left: none;
     margin-right: 6px;
     font-weight: 600;
+  }
+
+  .contest-question-info ul.list-group li:nth-child(5) {
+    cursor: pointer;
   }
 `
 
@@ -255,6 +260,27 @@ const OptimizedContestProblemsPage = (): JSX.Element => {
       window.removeEventListener('mouseup', onMouseUp)
     }
   }, [onMouseMove, onMouseUp])
+
+  const difficultyView = document.querySelector(
+    '.contest-question-info ul.list-group li:nth-of-type(5)'
+  )
+  const toCNProblemPage = useCallback(
+    (e: Event) => {
+      e.preventDefault()
+      e.stopPropagation()
+      const href = location.href.replace(/^(https?:\/\/leetcode).com/, '$1.cn')
+      window.open(href, '_blank')
+    },
+    [difficultyView]
+  )
+
+  useEffect(() => {
+    difficultyView && difficultyView.addEventListener('click', toCNProblemPage)
+    return () => {
+      difficultyView &&
+        difficultyView.removeEventListener('click', toCNProblemPage)
+    }
+  }, [toCNProblemPage])
 
   return (
     <>
