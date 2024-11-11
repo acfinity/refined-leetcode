@@ -260,22 +260,28 @@ const OptimizedContestProblemsPage = (): JSX.Element => {
       window.removeEventListener('mouseup', onMouseUp)
     }
   }, [onMouseMove, onMouseUp])
-
+  const isCN = /^(https?:\/\/leetcode).cn/.test(location.href)
   const difficultyView = document.querySelector(
     '.contest-question-info ul.list-group li:nth-of-type(5)'
-  )
+  ) as HTMLElement
   const toCNProblemPage = useCallback(
     (e: Event) => {
       e.preventDefault()
       e.stopPropagation()
-      const href = location.href.replace(/^(https?:\/\/leetcode).com/, '$1.cn')
+      const href = location.href.replace(
+        /^(https?:\/\/leetcode).c(om|n)\//,
+        `$1.${isCN ? 'com' : 'cn'}/`
+      )
       window.open(href, '_blank')
     },
     [difficultyView]
   )
 
   useEffect(() => {
-    difficultyView && difficultyView.addEventListener('click', toCNProblemPage)
+    if (difficultyView) {
+      difficultyView.addEventListener('click', toCNProblemPage)
+      difficultyView.title = isCN ? '跳转美服详情页' : '跳转国服详情页'
+    }
     return () => {
       difficultyView &&
         difficultyView.removeEventListener('click', toCNProblemPage)
